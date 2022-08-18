@@ -22,7 +22,7 @@ To deploy and create intance of contract and then assign the value of the instan
 Because of asynchronous nature of our smart contracts, developing them relies heavily upon javascript promises. Javascript promises are basically a way of handling the eventual result of asynchronous application. Here deploy() will going to return a promise, whenever this promise is finished, then call the then() function, that going to accept a callback function, then set the return value, which is going to get the deployed instance of contract and set it to token variable.
 
 - truffle(development)>> token.address
-'0x4357B32550DA07CBd337546C3B0A7845311Ec6B9'
+-- '0x4357B32550DA07CBd337546C3B0A7845311Ec6B9'
 
 - truffle(development)>> token.totalSupply()
 BN {
