@@ -1,12 +1,26 @@
 # Crowd Sale ICO
 
-### Steps
+## Steps
 
 - truffle init
 - Write smart sontrat in contracts folder
 - Edit truffle-config.js file
 - Edit/Add migrations file
 - ganache-cli (Local blockchain for accounts)
+
+## Testing
+
+
+- touch test/RAJToken.js
+
+Write test cases in RAJToken.js file.
+
+## Initialize git
+
+- git init
+- git status
+
+## Truffle console
 
 Javascript runtime environment
 - truffle console  
@@ -27,7 +41,7 @@ Because of asynchronous nature of our smart contracts, developing them relies he
 - truffle(development)>> token.totalSupply()
 BN {
   negative: 0,
-  words: [ 10000000, <1 empty item> ],
+  words: [ 1000000, <1 empty item> ],
   length: 1,
   red: null
 }
@@ -41,27 +55,66 @@ undefined
 
 BN {
   negative: 0,
-  words: [ 10000000, <1 empty item> ],
+  words: [ 1000000, <1 empty item> ],
   length: 1,
   red: null
 }
 
 - truffle(development)>> totalSupply.toNumber()
-10000000
+1000000
 
-- truffle(development)>> .exit  (To exit from the console)
+To exit from the console
+- truffle(development)>> .exit 
 
-## Testing
+Get list of accounts from ganache
+- truffle(development)>> web3.eth.accounts or accounts
+
+First account, deployer
+- truffle(development)>> web3.eth.accounts[0] or accounts[0]
+
+Deploy contract, create instance of contract and assign to a variable 'token' 
+- truffle(development)>> RAJToken.deployed().then(function(instance){token=instance;})
+undefine
+
+Contract address to token
+- truffle(development)>> token.address
+'0x1388cCce945d2c4893A982d9b3B9A05aAB515682'
+
+Check Total Supply of token
+- truffle(development)>> token.totalSupply().then(function(_totalSupply){totalSupply=_totalSupply;})
+
+Convert BN (BigNumber) to Number
+- truffle(development)>> totalSupply.toNumber()
+1000000
+
+Check Balance of any account
+- truffle(development)>> token.balanceOf(accounts[0])
+BN {
+  negative: 0,
+  words: [ 1000000, <1 empty item> ],
+  length: 1,
+  red: null
+}
+
+Check Balance and Convert to BigNumber
+- truffle(development)>> token.balanceOf(accounts[0]).then(function(_balanceOfAdmin){balanceOfAdmin = _balanceOfAdmin;})
+
+- truffle(development)>> balanceOfAdmin.toNumber()
+1000000
+
+- truffle(development)>> token.balanceOf(accounts[1]).then(function(_balanceOfAccount1){balanceOfAccount1 = _balanceOfAccount1;})
+
+- truffle(development)>> balanceOfAccount1.toNumber()
+0
+
+Transfer tokens to some other account
+- truffle(development)>> token.transfer(web3.eth.accounts[1], 1, {from: web3.eth.accounts[0]})
 
 
-- touch test/RAJToken.js
 
-Write test cases in RAJToken.js file.
 
-## Initialize git
 
-- git init
-- git status
+
 
 
 
