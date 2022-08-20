@@ -6,7 +6,7 @@ var RAJToken = artifacts.require("./RAJToken.sol");
 
 //Initialize test
 
-contract('RAJToken', function(accounts){ 
+contract('RAJToken', function(accounts){  //passing a function which gives us accounts
     var tokenInstance;
     it('initializes the contract with correct values', function(){
         return RAJToken.deployed().then(function(instance){

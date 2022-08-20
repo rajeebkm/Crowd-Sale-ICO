@@ -1,0 +1,127 @@
+{
+  "contractName": "RAJTokenSale",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/RAJTokenSale.sol\":\"RAJTokenSale\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/RAJTokenSale.sol\":{\"keccak256\":\"0x2b36caee9d077b56b352cabfbbd7dce860ecd73f2acd8f05940904a54d28d081\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8d24425ef134f7c4f63efd0031a62cfd536211ba1ddfeb22220ae4dcb71bad71\",\"dweb:/ipfs/QmdS5drNSqWt3GvEAovfFHun8bR5BafXeDmYVUm7c7XPuc\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220ad7ffe7dad3eefe838eb4bcd7ff182de6e5ece950750a93179fa4ab9a7312a6e64736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220ad7ffe7dad3eefe838eb4bcd7ff182de6e5ece950750a93179fa4ab9a7312a6e64736f6c634300080d0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "56:230:0:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "56:230:0:-:0;;;;;",
+  "source": "//SPDX-License-Identifier:MIT\npragma solidity ^0.8.13;\n\ncontract RAJTokenSale{\n\n    // address public rajtoken;\n    // uint256 public tokenprice;\n    // constructor(address _rajtoken, uint256 _tokenprice){\n    //     rajtoken = _rajtoken;\n    //     tokenprice = _tokenprice;\n    // }\n}",
+  "sourcePath": "/home/hp/RAJEEB/Rajeeb/Rajeeb_Github_Repo/ICO Crowd Sale/contracts/RAJTokenSale.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/RAJTokenSale.sol",
+    "exportedSymbols": {
+      "RAJTokenSale": [
+        2
+      ]
+    },
+    "id": 3,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "30:24:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RAJTokenSale",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "RAJTokenSale",
+        "nameLocation": "65:12:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "56:230:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "30:256:0"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/RAJTokenSale.sol",
+    "exportedSymbols": {
+      "RAJTokenSale": [
+        2
+      ]
+    },
+    "id": 3,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "30:24:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RAJTokenSale",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "RAJTokenSale",
+        "nameLocation": "65:12:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "56:230:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "30:256:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {
+    "1660893070671": {
+      "events": {},
+      "links": {},
+      "address": "0xd455ba8Dc8E3091710f8598bda6Ece99528129D5",
+      "transactionHash": "0x8f263da24ec2312354e8b68b90927646caaca3877c5299cde345661be205c9e9"
+    }
+  },
+  "schemaVersion": "3.4.6",
+  "updatedAt": "2022-08-20T02:12:48.705Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
