@@ -15,7 +15,9 @@
 # END SALE
 
 
-# Refrenece link (for light-server): https://github.com/johnpapa/lite-server
+# Refrenece link
+
+# Light-server: https://github.com/johnpapa/lite-server
 
 # Bootstrap (https://getbootstrap.com/docs/3.4/getting-started/)
 
@@ -32,6 +34,286 @@
 # https://cdn.jsdelivr.net/npm/truffle-contract@4.0.31/dist/truffle-contract.min.js or, https://raw.githubusercontent.com/dappuniversity/token_sale/master/src/js/truffle-contract.min.js
 
 # https://github.com/ChainSafe/web3.js
+
+
+# Deploy contracts using Geth
+Geth is a Go implementation of Ethereum. (https://github.com/ethereum/go-ethereum)
+Install Geth for Ubuntu: (https://geth.ethereum.org/docs/install-and-build/installing-geth)
+
+The following command enables the launchpad repository:
+sudo add-apt-repository -y ppa:ethereum/ethereum
+
+Then, to install the stable version of go-ethereum:
+sudo apt-get update
+sudo apt-get install ethereum
+
+Or, alternatively the develop version:
+
+sudo apt-get update
+sudo apt-get install ethereum-unstable
+
+# Geth commands
+ Command line options: https://geth.ethereum.org/docs/interface/command-line-options
+
+ Commands:
+
+ >> which geth
+ user/bin/geth
+
+ >> geth version
+ Git Commit: 671094279e8d27f4b4c3c94bf8b636c26b473976
+Architecture: amd64
+Go Version: go1.18.4
+Operating System: linux
+GOPATH=
+GOROOT=go
+
+Connect to Rinkeby node
+>> geth --rinkeby --http --http.api="personal,eth,network,web3,net" --ipcpath "/home/hp/.ethereum/geth.ipc"
+
+Geth Javascript console
+>> geth attach
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.10.21-stable-67109427/linux-amd64/go1.18.4
+at block: 0 (Thu Jan 01 1970 05:30:00 GMT+0530 (IST))
+ datadir: /home/hp/.ethereum
+ modules: admin:1.0 debug:1.0 engine:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+To exit, press ctrl-d or type exit
+> 
+
+Ethereum syncing
+> eth.syncing
+{
+  currentBlock: 4917113,
+  healedBytecodeBytes: 0,
+  healedBytecodes: 0,
+  healedTrienodeBytes: 0,
+  healedTrienodes: 0,
+  healingBytecode: 0,
+  healingTrienodes: 0,
+  highestBlock: 15310588,
+  startingBlock: 0,
+  syncedAccountBytes: 703711615,
+  syncedAccounts: 4364571,
+  syncedBytecodeBytes: 89067051,
+  syncedBytecodes: 20451,
+  syncedStorage: 23193900,
+  syncedStorageBytes: 5328936476
+}
+>
+
+Rinkeby testnet Explorer (https://rinkeby.etherscan.io/)
+
+Exit the console
+> exit
+
+Create a new account on Rinkeby
+
+$ geth --rinkeby account new
+INFO [08-22|13:19:08.132] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [08-22|13:19:08.161] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Password: 
+Repeat password:
+
+Your new key was generated
+
+Public address of the key:   0xdd43da124F4ccB16430319C7466f47E50C63bf28
+Path of the secret key file: /home/hp/.ethereum/rinkeby/keystore/UTC--2022-08-22T07-51-12.405297705Z--dd43da124f4ccb16430319c7466f47e50c63bf28
+
+- You can share your public address with anyone. Others need it to interact with you.
+- You must NEVER share the secret key with anyone! The key controls access to your funds!
+- You must BACKUP your key file! Without the key, it's impossible to access account funds!
+- You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
+$
+
+Faucet ETH Rinkeby (https://faucet.rinkeby.io/): Paste social link (twiiter) to get free faucet.
+Example of tweet: 
+Requesting faucet funds into 0xdd43da124F4ccB16430319C7466f47E50C63bf28 on the #Rinkeby #Ethereum test network.
+
+Copy the url of tweet and paste it on https://faucet.rinkeby.io/ (As we cann't mine on Rinkeby test net, we can request to get faucet)
+
+Go to geth console and check the balance
+$ geth attach
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.10.21-stable-67109427/linux-amd64/go1.18.4
+at block: 0 (Thu Jan 01 1970 05:30:00 GMT+0530 (IST))
+ datadir: /home/hp/.ethereum
+ modules: admin:1.0 debug:1.0 engine:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+To exit, press ctrl-d or type exit
+> eth.accounts 
+["","",...] 
+//Here we will get list of accounts thatwe created. We will get one account if we created one account.
+
+> eth.accounts[0]
+""
+
+Get balance of account
+> eth.getBalance(eth.accounts[0])
+
+# Modify/Add network to (Rinkeby) in truffle-confg.js file
+
+rinkeby: {
+  host: "localhost",
+  port: 8545,
+  network_id: 4,
+  gas: 4700000
+}
+
+# Unlock our first account in the list
+
+$ get attach
+
+> personal.unlockAccount(eth.accounts[0], null, 1200) //null means password, 1200 means unlock for 1200 second
+Unlock account: 
+passphrase: 
+true 
+
+> eth.syncing   //To check if geth node has finished syncing (wait untill it syncs)
+{
+
+}
+> eth.syncing 
+false     //If we don't see any object then geth has succefully synced with rinkeby network
+
+> exit
+
+# Migrate contract
+
+$ truffle migrate --reset --compile-all --network rinkeby 
+//we have to ensure that account is unlocked that we set for 20 minutes before. otherwise unlock again.
+//We can get the contract address of our contract after deployment. It will also added to the build/contract/.json file, and check network id 4 in .json file.
+
+Create instance of Token Contract in geth console
+$ geth attach
+
+Keep track of admin
+> var admin = eth.accounts[0]
+
+Check admin
+> admin
+
+Set tokensAvailable that will be transferred to RAJTokenSale address
+> var tokensAvailable = 750000
+
+Check tokensAvailable
+> tokensAvailable
+750000
+
+Store tokenSaleAddress that we will get from json file after migration
+> var tokenSaleAddress = '0x.....'
+
+tokenInstance of RAJToken contract so that we can call transfer function.
+
+1. Describe the token contract to the web3 - ABI (Abstract Binary Interface basically used in Ethereum Virtual Machine (EVM) allows us to be encoded and decoded etc. and also create an instance in javascript with web3)
+2. Tell web3 the token address
+
+Copy the abi array from RAJToken.json and assign it to a variable (abi)
+> var abi = []
+
+Tell web3 the token address
+> var tokenAddress = '0x...'
+
+Deployed instance of the contract (pass the abi)
+> var TokenContract = web3.eth.contract(abi) //we will get web3 object
+
+Create tokenInstance from TokenContract at tokenAddress (tokenInstance)
+> var tokenInstance = TokenContract.at(tokenAddress)
+
+Check name of token
+> tokenInstance.name()
+RAJ Token 
+//We are reading data from smart contract on Rinkeby test network in our geth console.
+
+Check symbol of token
+> tokenInstance.symbol()
+RAJ
+
+Address of token
+> tokenInstance.address
+'0x...'
+
+# Transfer the token to the tokenSaleAddress
+> tokenInstance.transfer(tokenSaleAddress, tokensAvailable, {from: admin})
+"0x......"
+
+Check balance
+> tokenInstance.balanceOf(admin)
+250000
+
+> tokenInstance.balanceOf(tokenSaleAddress)
+750000
+
+# Connect client side application to our smart contract that are connected to Rinkeby testnet network
+Get accounts that we deployed our smart contracts with or any other accounts from our machine (geth) and import to MetaMask with that json file, and enter the passwork that we created while creating this account with geth.
+
+
+$ ls -l /home/hp/.ethereum/rinkeby/keystore
+//We will get json file of each account, and we will upload into MetaMask
+
+$ npm run dev
+
+// As first account is the admin, RAJ Token amount will be reflected in the fronted after npm run dev.
+
+
+# Deploy contracts using Infura Rinkeby
+- Infura website: https://infura.io/
+- Login to Infura, and create project and copy  Network Endpoints. (https://rinkeby.infura.io/v3/12828434f45b4b759851ae73c37cfb5d)
+- Make .env file to save MNEMONIC and ENDPOINT_KEY (.env is for not to expose to the public)
+- Go to truffle-config.js file, add MNEMONIC and ENDPOINT_KEY (MNEMONIC is metamask private key)
+- Install truffle HDWallet Provider: (npm install @truffle/hdwallet-provider)
+- Install dotenv: (npm install dotenv --save)
+- Add this to truffle-config.js file
+
+  require("dotenv").config();
+  const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+  const mnemonic = process.env.MNEMONIC;
+  const tokenKey = process.env.ENDPOINT_KEY;
+
+    /* Rinkeby Testnet */
+    rinkeby: {
+      provider: () => new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/" + tokenKey),
+      network_id: 4,
+      // gas : 6700000,
+      // gasPrice : 10000000000,
+      confirmations: 2,
+      networkCheckTimeout: 10000,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
+  - Migrate and deploythe contracts with Rinkeby testnet.
+  
+  $ truffle console --network rinkeby
+  truffle(rinkeby)> truffle migrate --reset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
