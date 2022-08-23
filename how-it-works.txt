@@ -293,7 +293,32 @@ $ npm run dev
   truffle(rinkeby)> truffle migrate --reset
 
 
+# Deploying the Crowd Sale website
 
+- Craete a folder "docs" whcih contains all "src files" and "json files" like we used bs-config.json file to take all the files to the root of our project and used for light-server as:
+({
+    "server":{
+        "baseDir": ["./src", "./build/contracts"]
+    }
+})
+
+- Make a srcipt that's going to take all the files that we want from the src and build/contracts and put those all in docs directory. (touch deployfronted.sh)
+
+- Go to deployfronted.sh, and write script for synchronizing all the files.
+rsync -r src/ docs/
+rsync build/contracts/* docs/
+
+- Make it to be executable. (chmod +x deployfronted.sh)
+
+- Run the executable file: (./deployfronted.sh)
+
+- Check the docs folder, and all the files from src/ and build/contracts/, that we wanted to be available
+
+- Then, deploy it to github (write in deployfronted.sh file) as:
+rsync -r src/ docs/
+rsync build/contracts/* docs/
+git add .
+git commit -m "Compile assets for Github Pages"
 
 
 
