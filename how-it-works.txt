@@ -323,6 +323,12 @@ git push -u origin master
 
 - Then run the executable file (./deployfronted.sh)
 
+# Set up the ICO Crowd Sale repository to serve pages for Github.
+
+- Go to repository Settings, then go to Github Pages, and chosse "master branch/docs folder" to serve website. Then click Save button.
+
+- Then check the website: https://rajeebkm.github.io/Crowd-Sale-ICO/
+
 
 
 
