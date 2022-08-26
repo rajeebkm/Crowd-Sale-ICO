@@ -198,6 +198,97 @@ undefined
 
 
 
+# Deploy contracts using Infura Rinkeby
+- Infura website: https://infura.io/
+- Login to Infura, and create project and copy  Network Endpoints. (https://rinkeby.infura.io/v3/12828434f45b4b759851ae73c37cfb5d)
+- Make .env file to save MNEMONIC and ENDPOINT_KEY (.env is for not to expose to the public)
+- Go to truffle-config.js file, add MNEMONIC and ENDPOINT_KEY (MNEMONIC is metamask private key)
+- Install truffle HDWallet Provider: (npm install @truffle/hdwallet-provider)
+- Install dotenv: (npm install dotenv --save)
+- Add this to truffle-config.js file
+
+  require("dotenv").config();
+  const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+  const mnemonic = process.env.MNEMONIC;
+  const tokenKey = process.env.ENDPOINT_KEY;
+
+    /* Rinkeby Testnet */
+    rinkeby: {
+      provider: () => new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/" + tokenKey),
+      network_id: 4,
+      // gas : 6700000,
+      // gasPrice : 10000000000,
+      confirmations: 2,
+      networkCheckTimeout: 10000,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
+  - Migrate and deploythe contracts with Rinkeby testnet.
+  
+  $ truffle console --network rinkeby
+  truffle(rinkeby)> truffle migrate --reset
+
+
+# Deploying the Crowd Sale website
+
+- Craete a folder "docs" whcih contains all "src files" and "json files" like we used bs-config.json file to take all the files to the root of our project and used for light-server as:
+({
+    "server":{
+        "baseDir": ["./src", "./build/contracts"]
+    }
+})
+
+- Make a srcipt that's going to take all the files that we want from the src and build/contracts and put those all in docs directory. (touch deployfronted.sh)
+
+- Go to deployfronted.sh, and write script for synchronizing all the files.
+rsync -r src/ docs/
+rsync build/contracts/* docs/
+
+- Make it to be executable. (chmod +x deployfronted.sh)
+
+- Run the executable file: (./deployfronted.sh)
+
+- Check the docs folder, and all the files from src/ and build/contracts/, that we wanted to be available
+
+- Then, deploy it to github (write in deployfronted.sh file) as:
+rsync -r src/ docs/
+rsync build/contracts/* docs/
+git add .
+git commit -m "Compile assets for Github Pages"
+git push -u origin master
+
+- Then run the executable file (./deployfronted.sh)
+
+# Set up the ICO Crowd Sale repository to serve pages for Github.
+
+- Go to repository Settings, then go to Github Pages, and chosse "master branch/docs folder" to serve website. Then click Save button.
+
+- Then check the website: https://rajeebkm.github.io/Crowd-Sale-ICO/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
